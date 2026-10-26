@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaveri Heritage Foods – Artisanal Sweets & Confections</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Lato:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <div class="logo-emblem" aria-hidden="true">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="30" r="28" stroke="#C9A84C" stroke-width="2"/>
+            <path d="M30 10 C20 18 14 26 14 34 C14 42 21 48 30 48 C39 48 46 42 46 34 C46 26 40 18 30 10Z" fill="#6B3A2A" opacity="0.8"/>
+            <path d="M22 32 Q30 22 38 32 Q30 44 22 32Z" fill="#C9A84C" opacity="0.9"/>
+            <circle cx="30" cy="30" r="5" fill="#F5E6C8"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">Kaveri Heritage</span>
+          <span class="brand-sub">Artisanal Foods Co.</span>
+        </div>
+      </div>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <a href="#home" class="nav-link active" data-view="storefront" data-scroll="hero">Home</a>
+        <a href="#sweets" class="nav-link" data-view="storefront" data-scroll="catalog">Our Sweets</a>
+        <a href="#craftsmanship" class="nav-link" data-view="storefront" data-scroll="craftsmanship">Craftsmanship</a>
+        <a href="#dashboard" class="nav-link" data-view="dashboard">Process Dashboard</a>
+      </nav>
+      <div class="header-actions">
+        <button class="cart-btn" id="cart-toggle" aria-label="Open shopping cart">
+          <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-badge" id="cart-count" aria-live="polite">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <a href="#home" class="mob-link" data-view="storefront" data-scroll="hero">Home</a>
+      <a href="#sweets" class="mob-link" data-view="storefront" data-scroll="catalog">Our Sweets</a>
+      <a href="#craftsmanship" class="mob-link" data-view="storefront" data-scroll="craftsmanship">Craftsmanship</a>
+      <a href="#dashboard" class="mob-link" data-view="dashboard">Process Dashboard</a>
+    </nav>
+  </header>
+
+  <!-- STOREFRONT VIEW -->
+  <main id="view-storefront" class="view active" role="main">
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero" aria-labelledby="hero-heading">
+      <div class="hero-bg-pattern" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">Thanjavur, Tamil Nadu · Est. 1987</p>
+        <h1 class="hero-heading" id="hero-heading">
+          Handcrafted with<br /><em>Ancient Recipes,</em><br />Modern Love.
+        </h1>
+        <p class="hero-sub">
+          Every bite tells the story of small-batch tradition — zero preservatives,
+          hyperlocal ingredients, and a craft passed down through generations.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-scroll="catalog">Shop Collection</button>
+          <button class="btn btn-ghost" data-scroll="craftsmanship">Our Story</button>
+        </div>
+        <div class="hero-badges">
+          <span class="badge">🌿 Zero Preservatives</span>
+          <span class="badge">🤝 Authentically Handmade</span>
+          <span class="badge">⭐ 4.8 / 5.0 Rating</span>
+          <span class="badge">🚚 1–3 Day Delivery</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-plate">
+          <div class="hero-sweet s1"></div>
+          <div class="hero-sweet s2"></div>
+          <div class="hero-sweet s3"></div>
+          <div class="hero-sweet s4"></div>
+          <div class="hero-plate-ring"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCT CATALOG -->
+    <section class="catalog-section" id="catalog" aria-labelledby="catalog-heading">
+      <div class="section-header">
+        <p class="section-eyebrow">Small-Batch · Seasonal · Soulful</p>
+        <h2 id="catalog-heading" class="section-title">Our Sweet Collections</h2>
+        <p class="section-desc">Each confection is hand-crafted in micro-batches using heirloom recipes, sourced directly from South Indian farms.</p>
+      </div>
+      <div class="product-grid" id="product-grid" role="list" aria-label="Product catalog"></div>
+    </section>
+
+    <!-- CRAFTSMANSHIP -->
+    <section class="craft-section" id="craftsmanship" aria-labelledby="craft-heading">
+      <div class="craft-inner">
+        <div class="craft-text">
+          <p class="section-eyebrow">Our Philosophy</p>
+          <h2 id="craft-heading" class="section-title" style="color:#3B1E08;">The Art of Artisanal Making</h2>
+          <p class="craft-desc">At Kaveri Heritage Foods, every sweet begins with a story — of a grandmother's recipe, of jaggery slow-cooked over a wood flame, of rose petals gathered at dawn. We believe the best confections are never rushed.</p>
+          <p class="craft-desc">Our small-batch approach ensures every piece is individually inspected for texture, flavour balance, and that unmistakable hand-crafted character. FSSAI registered. Authentically prepared. Customer-first priority.</p>
+          <div class="craft-stats">
+            <div class="stat"><span class="stat-num">35+</span><span class="stat-label">Years of Craft</span></div>
+            <div class="stat"><span class="stat-num">12</span><span class="stat-label">Heirloom Recipes</span></div>
+            <div class="stat"><span class="stat-num">50k+</span><span class="stat-label">Happy Customers</span></div>
+            <div class="stat"><span class="stat-num">0</span><span class="stat-label">Preservatives</span></div>
+          </div>
+        </div>
+        <div class="craft-visual" aria-hidden="true">
+          <div class="craft-card cc1"><div class="cc-icon">🌿</div><h3>Farm-Sourced Ingredients</h3><p>Directly from Tamil Nadu, Karnataka & Kerala farms — organic jaggery, fresh coconuts, premium saffron.</p></div>
+          <div class="craft-card cc2"><div class="cc-icon">🔥</div><h3>Slow-Cooked Tradition</h3><p>Hours of careful, low-flame cooking preserve the depth of flavour that industrial methods can never replicate.</p></div>
+          <div class="craft-card cc3"><div class="cc-icon">✅</div><h3>Quality Assured</h3><p>Every batch undergoes taste, texture and consistency checks before being hand-wrapped in eco-friendly packaging.</p></div>
+          <div class="craft-card cc4"><div class="cc-icon">📦</div><h3>Eco-Packaged</h3><p>Biodegradable wrapping, recycled boxes, and zero single-use plastic — good for you and the planet.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="brand-name">Kaveri Heritage Foods</span>
+          <span class="brand-sub">Traditional Foods & Agro Enterprise</span>
+          <p class="footer-addr">📍 Thanjavur, Tamil Nadu – 613001</p>
+          <p class="footer-reg">FSSAI Reg. No: 12345678901234</p>
+        </div>
+        <div class="footer-links">
+          <h4>Explore</h4>
+          <a href="#hero">Home</a>
+          <a href="#catalog">Our Sweets</a>
+          <a href="#craftsmanship">Craftsmanship</a>
+          <a href="#" data-view="dashboard">Process Dashboard</a>
+        </div>
+        <div class="footer-trust">
+          <h4>Quality Promises</h4>
+          <p>🌿 Zero Preservatives</p>
+          <p>🤝 Authentically Prepared</p>
+          <p>⭐ Quality Assured</p>
+          <p>👑 Customer Priority</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Kaveri Heritage Foods Co. · All rights reserved · Crafted with ❤️ in Thanjavur</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- DASHBOARD VIEW -->
+  <main id="view-dashboard" class="view" role="main" aria-label="Operations dashboard" style="display:none;">
+    <div class="dashboard-header">
+      <button class="btn btn-ghost back-btn" id="back-to-store">← Back to Store</button>
+      <div>
+        <h1 class="dashboard-title">System Operations & Process Flow</h1>
+        <p class="dashboard-sub">Live operational map across Customer · Inventory · Manufacturer systems</p>
+      </div>
+      <div class="dash-status-bar">
+        <span class="status-pill active-pill">● System Online</span>
+        <span class="status-pill info-pill" id="dash-time"></span>
+      </div>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi-card"><span class="kpi-icon">🛒</span><div><span class="kpi-val" id="kpi-orders">0</span><span class="kpi-label">Cart Orders Today</span></div></div>
+      <div class="kpi-card"><span class="kpi-icon">📦</span><div><span class="kpi-val">847</span><span class="kpi-label">Units in Stock</span></div></div>
+      <div class="kpi-card"><span class="kpi-icon">⚠️</span><div><span class="kpi-val">3</span><span class="kpi-label">Low-Stock Alerts</span></div></div>
+      <div class="kpi-card"><span class="kpi-icon">🏭</span><div><span class="kpi-val">2</span><span class="kpi-label">Active Batches</span></div></div>
+      <div class="kpi-card"><span class="kpi-icon">✅</span><div><span class="kpi-val">98%</span><span class="kpi-label">QA Pass Rate</span></div></div>
+    </div>
+
+    <div class="swimlanes-container">
+
+      <!-- CUSTOMER LANE -->
+      <div class="swimlane" id="lane-customer">
+        <div class="lane-header customer-lane-header">
+          <div class="lane-icon">👤</div>
+          <h2>Customer Process Flow</h2>
+          <span class="lane-badge active-badge">Active</span>
+        </div>
+        <div class="flow-pipeline">
+          <div class="flow-step completed"><div class="step-bubble">1</div><div class="step-content"><h3>Discovery & Browse</h3><p>Customer lands on storefront, browses artisanal catalog, reads product descriptions & ingredient details.</p><div class="step-tags"><span class="tag">Homepage</span><span class="tag">Catalog View</span></div></div><div class="step-status completed-badge">✓ Completed</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step completed"><div class="step-bubble">2</div><div class="step-content"><h3>Select Artisanal Sweets</h3><p>Customer reviews detailed flavour profiles, ingredients, pricing, and selects desired items from the collection.</p><div class="step-tags"><span class="tag">Product Cards</span><span class="tag">Filters</span></div></div><div class="step-status completed-badge">✓ Completed</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step flow-active"><div class="step-bubble active-bubble">3</div><div class="step-content"><h3>Add Items to Cart</h3><p>Interactive cart drawer opens — customer manages quantities, removes items, and views live subtotal calculation.</p><div class="step-tags"><span class="tag">Cart Drawer</span><span class="tag">Qty Control</span><span class="tag">Subtotal</span></div></div><div class="step-status active-sbadge">● Active</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step pending"><div class="step-bubble pending-bubble">4</div><div class="step-content"><h3>Review Cart Summary</h3><p>Full order summary displayed: item list, individual pricing, quantities, and grand total before confirmation.</p><div class="step-tags"><span class="tag">Order Review</span><span class="tag">Pricing</span></div></div><div class="step-status pending-sbadge">⧖ Pending</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step pending"><div class="step-bubble pending-bubble">5</div><div class="step-content"><h3>Order Placement Confirmed</h3><p>Customer clicks "Proceed to Checkout" — success confirmation modal displayed. Order notification fires to Manufacturer & Inventory systems.</p><div class="step-tags"><span class="tag">Confirmation</span><span class="tag">Notification</span></div></div><div class="step-status pending-sbadge">⧖ Pending</div></div>
+        </div>
+      </div>
+
+      <!-- INVENTORY LANE -->
+      <div class="swimlane" id="lane-inventory">
+        <div class="lane-header inventory-lane-header">
+          <div class="lane-icon">📦</div>
+          <h2>Inventory Process Flow</h2>
+          <span class="lane-badge warning-badge">3 Alerts</span>
+        </div>
+        <div class="flow-pipeline">
+          <div class="flow-step completed">
+            <div class="step-bubble inv-bubble">1</div>
+            <div class="step-content">
+              <h3>Raw Material Stock Monitoring</h3>
+              <p>Real-time tracking of sugar, organic jaggery, nuts, cocoa, butter, saffron, rose petals & spices.</p>
+              <div class="inv-stock-grid">
+                <div class="stock-item ok"><span>Jaggery</span><div class="stock-bar"><div class="stock-fill" style="width:78%"></div></div><span>78%</span></div>
+                <div class="stock-item ok"><span>Cocoa</span><div class="stock-bar"><div class="stock-fill" style="width:65%"></div></div><span>65%</span></div>
+                <div class="stock-item warn-item"><span>Saffron</span><div class="stock-bar"><div class="stock-fill warn-fill" style="width:22%"></div></div><span class="warn-text">⚠️ 22%</span></div>
+                <div class="stock-item ok"><span>Almonds</span><div class="stock-bar"><div class="stock-fill" style="width:55%"></div></div><span>55%</span></div>
+                <div class="stock-item warn-item"><span>Rose Petals</span><div class="stock-bar"><div class="stock-fill warn-fill" style="width:18%"></div></div><span class="warn-text">⚠️ 18%</span></div>
+                <div class="stock-item ok"><span>Coconut</span><div class="stock-bar"><div class="stock-fill" style="width:83%"></div></div><span>83%</span></div>
+                <div class="stock-item warn-item"><span>Pistachios</span><div class="stock-bar"><div class="stock-fill warn-fill" style="width:15%"></div></div><span class="warn-text">⚠️ 15%</span></div>
+                <div class="stock-item ok"><span>Cardamom</span><div class="stock-bar"><div class="stock-fill" style="width:70%"></div></div><span>70%</span></div>
+              </div>
+            </div>
+            <div class="step-status completed-badge">✓ Monitoring Active</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step flow-active">
+            <div class="step-bubble inv-bubble active-bubble">2</div>
+            <div class="step-content">
+              <h3>Automated Low-Stock Alerts</h3>
+              <p>System auto-triggers procurement alerts when stock falls below 25% threshold.</p>
+              <div class="alert-items">
+                <div class="alert-row">🔴 <strong>Saffron</strong> — Below threshold · Procurement initiated</div>
+                <div class="alert-row">🔴 <strong>Rose Petals</strong> — Critical level · Express order placed</div>
+                <div class="alert-row">🟡 <strong>Pistachios</strong> — Low · Reorder triggered</div>
+              </div>
+            </div>
+            <div class="step-status active-sbadge">● 3 Alerts Active</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step flow-active">
+            <div class="step-bubble inv-bubble active-bubble">3</div>
+            <div class="step-content">
+              <h3>Batch Tracking for Production</h3>
+              <p>Each small-batch production run assigned a unique Batch ID for full traceability.</p>
+              <div class="batch-cards">
+                <div class="batch-card active-batch"><span class="batch-id">BATCH #KHF-2610-A</span><span>Cardamom Pistachio Fudge · 50 units</span><span class="batch-status in-progress-status">In Production</span></div>
+                <div class="batch-card active-batch"><span class="batch-id">BATCH #KHF-2610-B</span><span>Dark Chocolate Truffles · 80 units</span><span class="batch-status in-progress-status">QA Review</span></div>
+                <div class="batch-card done-batch"><span class="batch-id">BATCH #KHF-2609-C</span><span>Jaggery Coconut Crunch · 120 units</span><span class="batch-status done-status">Dispatched</span></div>
+              </div>
+            </div>
+            <div class="step-status active-sbadge">● 2 Batches Active</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step pending"><div class="step-bubble inv-bubble pending-bubble">4</div><div class="step-content"><h3>Stock Deduction on Confirmation</h3><p>Upon order confirmation, inventory records automatically deducted. Running totals updated across all SKUs in real-time.</p><div class="step-tags"><span class="tag">Auto-Deduct</span><span class="tag">SKU Sync</span><span class="tag">Real-time</span></div></div><div class="step-status pending-sbadge">⧖ Awaiting Orders</div></div>
+        </div>
+      </div>
+
+      <!-- MANUFACTURER LANE -->
+      <div class="swimlane" id="lane-manufacturer">
+        <div class="lane-header manufacturer-lane-header">
+          <div class="lane-icon">🏭</div>
+          <h2>Manufacturer / Production Flow</h2>
+          <span class="lane-badge active-badge">2 Active</span>
+        </div>
+        <div class="flow-pipeline">
+          <div class="flow-step completed"><div class="step-bubble mfr-bubble">1</div><div class="step-content"><h3>Order Notification Received</h3><p>Production team receives real-time order notification from storefront. Order ID, SKU list, and quantity breakdown logged.</p><div class="step-tags"><span class="tag">Order ID</span><span class="tag">SKU List</span><span class="tag">Alert</span></div></div><div class="step-status completed-badge">✓ Systems Connected</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step flow-active">
+            <div class="step-bubble mfr-bubble active-bubble">2</div>
+            <div class="step-content">
+              <h3>Recipe Allocation & Ingredient Batching</h3>
+              <p>Master recipe retrieved from digital library. Exact ingredient quantities measured and staged for production kitchen.</p>
+              <div class="recipe-grid">
+                <div class="recipe-item"><span class="ri-icon">📜</span><span>Heirloom Burfi Recipe v3.2</span></div>
+                <div class="recipe-item"><span class="ri-icon">⚖️</span><span>Ingredients weighed & staged</span></div>
+                <div class="recipe-item"><span class="ri-icon">🧑‍🍳</span><span>Artisan assigned: Ravi Kumar</span></div>
+              </div>
+            </div>
+            <div class="step-status active-sbadge">● In Progress</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step flow-active">
+            <div class="step-bubble mfr-bubble active-bubble">3</div>
+            <div class="step-content">
+              <h3>Hand-Crafting & Quality Assurance</h3>
+              <p>Artisan hand-crafts each batch using traditional methods. QA supervisor conducts sensory checks.</p>
+              <div class="qa-checklist">
+                <div class="qa-item qa-pass">✓ Taste profile verified</div>
+                <div class="qa-item qa-pass">✓ Texture consistency checked</div>
+                <div class="qa-item qa-pass">✓ Colour & appearance approved</div>
+                <div class="qa-item qa-pending">⧖ Aroma evaluation in progress</div>
+              </div>
+            </div>
+            <div class="step-status active-sbadge">● QA In Progress</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step pending"><div class="step-bubble mfr-bubble pending-bubble">4</div><div class="step-content"><h3>Eco-Friendly Packaging & Sealing</h3><p>QA-passed sweets hand-wrapped in biodegradable paper, placed in recycled kraft boxes, sealed with branded wax stamp and batch label.</p><div class="step-tags"><span class="tag">Zero Plastic</span><span class="tag">Wax Seal</span><span class="tag">Batch Label</span></div></div><div class="step-status pending-sbadge">⧖ Pending QA Clearance</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step pending"><div class="step-bubble mfr-bubble pending-bubble">5</div><div class="step-content"><h3>Dispatch-Ready Status Update</h3><p>Packaged order marked "Dispatch Ready" in system. Courier partner notified, tracking ID generated, customer notification queued.</p><div class="step-tags"><span class="tag">Tracking ID</span><span class="tag">Courier Alert</span><span class="tag">Customer SMS</span></div></div><div class="step-status pending-sbadge">⧖ Awaiting Packaging</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dash-legend">
+      <h3>Status Legend</h3>
+      <div class="legend-items">
+        <span class="legend-item"><span class="leg-dot completed-dot"></span>Completed</span>
+        <span class="legend-item"><span class="leg-dot active-dot"></span>Active / In Progress</span>
+        <span class="legend-item"><span class="leg-dot pending-dot"></span>Pending</span>
+        <span class="legend-item"><span class="leg-dot warning-ldot"></span>Alert / Warning</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- CART DRAWER -->
+  <aside class="cart-drawer" id="cart-drawer" role="complementary" aria-label="Shopping cart">
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-panel">
+      <div class="cart-header">
+        <h2>Your Cart <span id="cart-header-count" class="cart-count-badge">0</span></h2>
+        <button class="close-btn" id="close-cart" aria-label="Close cart">✕</button>
+      </div>
+      <div class="cart-body" id="cart-body">
+        <div class="cart-empty" id="cart-empty">
+          <div class="empty-icon">🛍️</div>
+          <p>Your cart is empty.</p>
+          <p class="empty-sub">Add some artisanal sweets to get started!</p>
+        </div>
+        <ul class="cart-items-list" id="cart-items-list" role="list"></ul>
+      </div>
+      <div class="cart-footer" id="cart-footer">
+        <div class="cart-subtotal">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">₹0.00</span>
+        </div>
+        <div class="cart-delivery">
+          <span>Delivery</span>
+          <span>FREE on all orders</span>
+        </div>
+        <button class="btn btn-primary btn-block" id="checkout-btn">Proceed to Checkout →</button>
+        <button class="btn btn-ghost btn-block" id="clear-cart">Clear Cart</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-backdrop" id="success-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true" style="display:none;">
+    <div class="modal">
+      <div class="modal-icon">🎉</div>
+      <h2 id="modal-title">Order Placed Successfully!</h2>
+      <p class="modal-body">Thank you for supporting artisanal craftsmanship. Your order has been received and our artisans at Kaveri Heritage Foods are already preparing it with love.</p>
+      <p class="modal-note"><em>(No payment required — this is a preview checkout experience.)</em></p>
+      <div class="modal-details" id="modal-order-details"></div>
+      <button class="btn btn-primary" id="modal-close">Continue Shopping</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
