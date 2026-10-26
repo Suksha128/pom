@@ -1,98 +1,158 @@
 /**
  * KAVERI HERITAGE FOODS
- * Artisanal Sweets E-Commerce & Operations Dashboard
- * app.js — State management, UI, Cart, View routing
+ * Artisanal Sweets & Savories E-Commerce & Operations Dashboard
+ * app.js — State management, UI, Cart, View routing & Category Filtering
  */
 
 'use strict';
 
 /* ═══════════════════════════════════════════════════════════════
-   1. PRODUCT DATA
+   1. PRODUCT DATA (Aligned with Figma & Artisanal Catalog)
 ══════════════════════════════════════════════════════════════════ */
 const PRODUCTS = [
   {
     id: 1,
+    name: 'Thanjavur Ashoka Halwa',
+    subname: 'Moong Dal & Ghee Halwa',
+    category: 'heritage',
+    image: 'images/ashoka-halwa.jpg',
+    emoji: '🍮',
+    tag: 'bestseller',
+    tagLabel: 'Thanjavur Special',
+    weight: '350g · Clay Handi',
+    price: 360,
+    description:
+      'The crown jewel of Thanjavur confectionery. Roasted yellow moong dal slow-simmered with pure village cow ghee, fragrant cardamom, and toasted cashews, served in traditional celebratory style.',
+    ingredients: ['Moong Dal', 'Pure Desi Ghee', 'Cane Sugar', 'Kaju (Cashews)', 'Green Cardamom'],
+    bgGrad: 'linear-gradient(135deg, #B52A2A 0%, #D45B34 50%, #E89A5A 100%)',
+  },
+  {
+    id: 2,
+    name: 'Traditional Handmade Murukku',
+    subname: 'Thenkuzhal Murukku',
+    category: 'savories',
+    image: 'images/murukku.jpg',
+    emoji: '🥨',
+    tag: 'heritage',
+    tagLabel: 'Artisanal Savory',
+    weight: '300g · Pack of 10',
+    price: 240,
+    description:
+      'Crunchy, spiral-shaped savory snacks extruded by hand using stone-ground raw rice flour, urad dal, cumin, and white sesame seeds. Fried in cold-pressed groundnut oil to golden perfection.',
+    ingredients: ['Raw Rice Flour', 'Urad Dal', 'Sesame Seeds', 'Asafoetida', 'Cold-Pressed Oil'],
+    bgGrad: 'linear-gradient(135deg, #A67C1E 0%, #C9A84C 50%, #E6C875 100%)',
+  },
+  {
+    id: 3,
+    name: 'Heritage Sesame Oil Mango Pickle',
+    subname: 'Maavadu / Avakaya Style',
+    category: 'savories',
+    image: 'images/sesame-pickle.jpg',
+    emoji: '🥭',
+    tag: 'bestseller',
+    tagLabel: 'Grandmother Recipe',
+    weight: '400g · Ceramic Jar',
+    price: 290,
+    description:
+      'Tender baby mangoes steeped in wood-pressed Chekku Gingelly (sesame) oil, hand-pounded red chillies, fenugreek, and sea salt. Naturally sun-cured with zero chemical preservatives.',
+    ingredients: ['Farm Mangoes', 'Wood-Pressed Sesame Oil', 'Guntur Chilli', 'Mustard', 'Fenugreek'],
+    bgGrad: 'linear-gradient(135deg, #8A1E1E 0%, #C43A2A 50%, #E0652B 100%)',
+  },
+  {
+    id: 4,
+    name: 'Organic Palm Jaggery Sweets',
+    subname: 'Karupatti Halwa & Mittai',
+    category: 'heritage',
+    image: 'images/palm-jaggery.jpg',
+    emoji: '🍯',
+    tag: 'heritage',
+    tagLabel: '100% Karupatti',
+    weight: '300g · 15 pieces',
+    price: 420,
+    description:
+      'Nutrient-dense native palm jaggery (Karupatti) reduced over wood flames with roasted cashews and aromatic dry ginger. Rich, earthy sweetness with deep therapeutic heritage values.',
+    ingredients: ['Native Palm Jaggery', 'Pure Ghee', 'Dry Ginger (Sukku)', 'Cardamom', 'Cashews'],
+    bgGrad: 'linear-gradient(135deg, #3B1E08 0%, #5C3215 50%, #8B5A3C 100%)',
+  },
+  {
+    id: 5,
     name: 'Handmade Cardamom Pistachio Fudge',
-    subname: 'Burfi',
+    subname: 'Kesar Pista Burfi',
+    category: 'sweets',
+    image: 'images/cardamom-burfi.jpg',
     emoji: '💚',
     tag: 'bestseller',
     tagLabel: 'Best Seller',
     weight: '250g · 16 pieces',
     price: 480,
     description:
-      'Slow-cooked khoya fudge infused with freshly-crushed green cardamom and hand-crushed Kesar pistachios. Each square has a melt-in-your-mouth texture with a warm, spiced finish that lingers.',
-    ingredients: ['Khoya', 'Pistachios', 'Cardamom', 'Organic Sugar', 'Ghee'],
+      'Slow-cooked whole milk mawa fudge generously infused with freshly crushed Idukki green cardamom and topped with toasted California pistachios. Melts gracefully on the palate.',
+    ingredients: ['Fresh Mawa (Khoya)', 'Pistachios', 'Idukki Cardamom', 'Organic Sugar', 'Silver Vark'],
     bgGrad: 'linear-gradient(135deg, #3A6B35 0%, #5E9B54 50%, #A8D89A 100%)',
   },
   {
-    id: 2,
-    name: 'Small-Batch Dark Chocolate Sea Salt Truffles',
-    subname: 'Artisan Truffles',
-    emoji: '🍫',
-    tag: 'new',
-    tagLabel: 'New Arrival',
-    weight: '200g · 12 truffles',
-    price: 650,
-    description:
-      'Single-origin 70% cacao ganache hand-rolled in premium Dutch cocoa powder, crowned with a single flake of Himalayan pink sea salt. An indulgent balance of bittersweet and savoury.',
-    ingredients: ['Dark Cacao 70%', 'Fresh Cream', 'Himalayan Salt', 'Butter', 'Vanilla'],
-    bgGrad: 'linear-gradient(135deg, #2C1608 0%, #6B3A2A 50%, #C4652B 100%)',
-  },
-  {
-    id: 3,
-    name: 'Rose Petal & Almond Infused Pralines',
-    subname: 'Gulkand Pralines',
-    emoji: '🌸',
-    tag: 'seasonal',
-    tagLabel: 'Seasonal',
-    weight: '180g · 10 pieces',
-    price: 560,
-    description:
-      'Crispy caramelised almond pralines folded with hand-dried rose petals and a whisper of gulkand (rose petal preserve). Delicately floral with a satisfying caramel crunch.',
-    ingredients: ['California Almonds', 'Rose Petals', 'Gulkand', 'Cane Sugar', 'Cardamom'],
-    bgGrad: 'linear-gradient(135deg, #8B1A4A 0%, #C42B7A 50%, #F4A0C0 100%)',
-  },
-  {
-    id: 4,
+    id: 6,
     name: 'Traditional Jaggery Coconut Crunch',
-    subname: 'Nariyal Chikki',
+    subname: 'Thengai Burfi / Chikki',
+    category: 'sweets',
+    image: 'images/coconut-crunch.jpg',
     emoji: '🥥',
     tag: '',
     tagLabel: '',
     weight: '300g · 20 pieces',
-    price: 340,
+    price: 320,
     description:
-      'A beloved South Indian classic: freshly-grated coconut slow-roasted with unrefined organic jaggery and a pinch of black pepper. Crunchy, chewy, and authentically rustic.',
-    ingredients: ['Fresh Coconut', 'Organic Jaggery', 'Black Pepper', 'Cardamom', 'Ghee'],
+      'Freshly grated Pollachi coconuts slow-roasted in unrefined organic sugarcane jaggery with crushed tellicherry black pepper and cardamom. Crispy outer texture with a rich, chewy core.',
+    ingredients: ['Pollachi Coconut', 'Organic Jaggery', 'Crushed Pepper', 'Cardamom', 'Desi Ghee'],
     bgGrad: 'linear-gradient(135deg, #5C3D0A 0%, #A0721E 50%, #D4AF37 100%)',
   },
   {
-    id: 5,
-    name: 'Saffron Honey Marzipan Squares',
-    subname: 'Kesar Badam Barfi',
-    emoji: '⭐',
-    tag: 'bestseller',
-    tagLabel: 'Best Seller',
-    weight: '220g · 14 pieces',
-    price: 720,
+    id: 7,
+    name: 'Royal Ghee Mysore Pak',
+    subname: 'Traditional Soft Ghee Sweet',
+    category: 'sweets',
+    image: 'images/mysore-pak.jpg',
+    emoji: '🧈',
+    tag: 'heritage',
+    tagLabel: 'Royal Recipe',
+    weight: '350g · 12 blocks',
+    price: 450,
     description:
-      'Persian-inspired almond marzipan blended with premium Kashmiri saffron strands and raw forest honey. Luxuriously smooth, aromatic, and richly golden — a true celebration sweet.',
-    ingredients: ['Kashmiri Saffron', 'Raw Almonds', 'Forest Honey', 'Rose Water', 'Cardamom'],
-    bgGrad: 'linear-gradient(135deg, #B5861A 0%, #D4AF37 50%, #F0D060 100%)',
+      'The authentic melt-in-the-mouth Mysore confection crafted from slow-roasted besan (gram flour), bubbling hot country ghee, and pure sugar syrup. Rich, golden, and deeply satisfying.',
+    ingredients: ['Gram Flour (Besan)', 'Village Cow Ghee', 'Cane Sugar', 'Cardamom Essence'],
+    bgGrad: 'linear-gradient(135deg, #C9A84C 0%, #E8C96A 50%, #F5DE98 100%)',
   },
   {
-    id: 6,
-    name: 'Tamarind Chilli Toffee Bites',
-    subname: 'Imli Candy',
-    emoji: '🌶️',
+    id: 8,
+    name: 'Small-Batch Dark Chocolate Sea Salt Truffles',
+    subname: 'Single-Origin 70% Cacao',
+    category: 'sweets',
+    image: 'images/chocolate-truffles.jpg',
+    emoji: '🍫',
     tag: 'new',
-    tagLabel: 'Fan Favourite',
-    weight: '150g · 24 bites',
-    price: 280,
+    tagLabel: 'Artisan Batch',
+    weight: '200g · 12 truffles',
+    price: 650,
     description:
-      'Tangy sun-dried tamarind pulp slow-cooked with cane sugar and a bold hit of Guntur red chilli. These chewy bites deliver a rollercoaster of sweet, sour, and fiery flavours.',
-    ingredients: ['Tamarind', 'Guntur Chilli', 'Cane Sugar', 'Rock Salt', 'Cumin'],
-    bgGrad: 'linear-gradient(135deg, #7A1C1C 0%, #C44B2B 50%, #E88A5A 100%)',
+      'Single-origin 70% Anamalai cacao ganache hand-rolled in Dutch alkalized cocoa powder and finished with a flake of Himalayan mineral pink salt. Sophisticated contrast of dark and savory.',
+    ingredients: ['70% Anamalai Cacao', 'Fresh Milk Cream', 'Himalayan Pink Salt', 'Cocoa Powder'],
+    bgGrad: 'linear-gradient(135deg, #2C1608 0%, #6B3A2A 50%, #C4652B 100%)',
+  },
+  {
+    id: 9,
+    name: 'Rose Petal & Almond Infused Pralines',
+    subname: 'Heirloom Gulkand Crunch',
+    category: 'sweets',
+    image: 'images/rose-pralines.jpg',
+    emoji: '🌸',
+    tag: 'seasonal',
+    tagLabel: 'Seasonal Craft',
+    weight: '180g · 10 pieces',
+    price: 560,
+    description:
+      'Caramelised golden almonds folded with hand-dried organic Damask rose petals and a touch of wild honey gulkand. Delicate floral aroma coupled with a delightful brittle snap.',
+    ingredients: ['California Almonds', 'Organic Damask Rose Petals', 'Wild Honey Gulkand', 'Cane Sugar'],
+    bgGrad: 'linear-gradient(135deg, #8B1A4A 0%, #C42B7A 50%, #F4A0C0 100%)',
   },
 ];
 
@@ -104,14 +164,13 @@ const STATE = {
   currentView: 'storefront',
   cartOpen: false,
   orderCount: 0,
+  activeCategory: 'all',
 };
 
-/** Persist cart to localStorage */
 function saveCart() {
   try { localStorage.setItem('khf_cart', JSON.stringify(STATE.cart)); } catch (_) {}
 }
 
-/** Load cart from localStorage */
 function loadCart() {
   try {
     const raw = localStorage.getItem('khf_cart');
@@ -119,7 +178,6 @@ function loadCart() {
   } catch (_) { STATE.cart = []; }
 }
 
-/** Load order count */
 function loadOrderCount() {
   try {
     STATE.orderCount = parseInt(localStorage.getItem('khf_orders') || '0', 10);
@@ -141,7 +199,15 @@ function addToCart(productId) {
   if (existing) {
     existing.qty += 1;
   } else {
-    STATE.cart.push({ id: product.id, name: product.name, emoji: product.emoji, price: product.price, qty: 1 });
+    STATE.cart.push({
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      emoji: product.emoji,
+      price: product.price,
+      weight: product.weight,
+      qty: 1
+    });
   }
   saveCart();
   updateCartUI();
@@ -227,7 +293,10 @@ function renderCartItems(listEl) {
     li.setAttribute('role', 'listitem');
     li.dataset.id = item.id;
     li.innerHTML = `
-      <span class="cart-item-emoji" aria-hidden="true">${item.emoji}</span>
+      <div class="cart-item-img-wrap">
+        <img src="${item.image || ''}" alt="${escapeHTML(item.name)}" class="cart-item-thumb" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <span class="cart-item-emoji-fallback" style="display:none;">${item.emoji}</span>
+      </div>
       <div class="cart-item-info">
         <p class="cart-item-name" title="${escapeHTML(item.name)}">${escapeHTML(item.name)}</p>
         <p class="cart-item-price">₹${item.price.toFixed(2)} × ${item.qty} = <strong>₹${(item.price * item.qty).toFixed(2)}</strong></p>
@@ -246,14 +315,18 @@ function renderCartItems(listEl) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   5. PRODUCT CATALOG RENDERING
+   5. PRODUCT CATALOG & FILTERING
 ══════════════════════════════════════════════════════════════════ */
 function renderProducts() {
   const grid = document.getElementById('product-grid');
   if (!grid) return;
 
+  const filtered = STATE.activeCategory === 'all'
+    ? PRODUCTS
+    : PRODUCTS.filter(p => p.category === STATE.activeCategory);
+
   grid.innerHTML = '';
-  PRODUCTS.forEach(product => {
+  filtered.forEach(product => {
     const card = document.createElement('article');
     card.className = 'product-card';
     card.setAttribute('role', 'listitem');
@@ -270,7 +343,14 @@ function renderProducts() {
     card.innerHTML = `
       <div class="product-image" style="background: ${product.bgGrad};">
         ${tagHTML}
-        <div class="product-emoji" role="img" aria-label="${escapeHTML(product.name)} illustration">${product.emoji}</div>
+        <img
+          src="${product.image}"
+          alt="${escapeHTML(product.name)}"
+          class="product-img"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        />
+        <div class="product-emoji" style="display:none;" role="img" aria-label="${escapeHTML(product.name)}">${product.emoji}</div>
       </div>
       <div class="product-info">
         <h3 class="product-name">${escapeHTML(product.name)}</h3>
@@ -302,6 +382,14 @@ function renderProducts() {
   });
 }
 
+function setCategoryFilter(category) {
+  STATE.activeCategory = category;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.category === category);
+  });
+  renderProducts();
+}
+
 /* ═══════════════════════════════════════════════════════════════
    6. VIEW ROUTING
 ══════════════════════════════════════════════════════════════════ */
@@ -323,7 +411,6 @@ function switchView(viewName) {
     STATE.currentView = 'storefront';
   }
 
-  // Update active nav link
   navLinks.forEach(link => {
     const lv = link.dataset.view;
     link.classList.toggle('active', lv === viewName);
@@ -339,7 +426,6 @@ function openCart() {
     drawer.classList.add('open');
     STATE.cartOpen = true;
     document.body.style.overflow = 'hidden';
-    // Focus first focusable element in panel
     setTimeout(() => {
       const closeBtn = document.getElementById('close-cart');
       if (closeBtn) closeBtn.focus();
@@ -353,7 +439,6 @@ function closeCart() {
     drawer.classList.remove('open');
     STATE.cartOpen = false;
     document.body.style.overflow = '';
-    // Return focus to cart toggle
     const toggle = document.getElementById('cart-toggle');
     if (toggle) toggle.focus();
   }
@@ -365,13 +450,16 @@ function closeCart() {
 function checkout() {
   if (STATE.cart.length === 0) return;
 
-  // Build order summary
   const details = STATE.cart.map(item =>
-    `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #EDD9B5;">
-      <span>${item.emoji} ${escapeHTML(item.name)} × ${item.qty}</span>
+    `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #EDD9B5;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <img src="${item.image}" alt="" style="width:32px;height:32px;border-radius:4px;object-fit:cover;" onerror="this.style.display='none'" />
+        <span>${escapeHTML(item.name)} × ${item.qty}</span>
+      </div>
       <strong>₹${(item.price * item.qty).toFixed(2)}</strong>
     </div>`
   ).join('');
+
   const total = getCartTotal();
   const orderId = 'KHF-' + Date.now().toString(36).toUpperCase();
 
@@ -382,13 +470,12 @@ function checkout() {
         Order #${orderId}
       </p>
       ${details}
-      <div style="display:flex;justify-content:space-between;padding:8px 0 0;font-weight:700;font-size:1rem;color:#3B1E08;">
-        <span>Total</span><span style="color:#C9A84C;">₹${total.toFixed(2)}</span>
+      <div style="display:flex;justify-content:space-between;padding:10px 0 0;font-weight:700;font-size:1.05rem;color:#3B1E08;">
+        <span>Total Amount</span><span style="color:#C9A84C;">₹${total.toFixed(2)}</span>
       </div>
     `;
   }
 
-  // Show modal
   const backdrop = document.getElementById('success-backdrop');
   if (backdrop) {
     backdrop.style.display = 'flex';
@@ -397,15 +484,11 @@ function checkout() {
     if (closeModal) setTimeout(() => closeModal.focus(), 100);
   }
 
-  // Increment order count
   STATE.orderCount += 1;
   saveOrderCount();
   updateDashboardKPI();
 
-  // Close cart
   closeCart();
-
-  // Clear cart
   clearCart();
 }
 
@@ -433,14 +516,10 @@ function updateDashboardKPI() {
   if (el) el.textContent = STATE.orderCount;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   10. UI ANIMATIONS & HELPERS
-══════════════════════════════════════════════════════════════════ */
 function animateCartBadge() {
   const badge = document.getElementById('cart-count');
   if (!badge) return;
   badge.classList.remove('bump');
-  // Force reflow
   void badge.offsetWidth;
   badge.classList.add('bump');
 }
@@ -459,7 +538,6 @@ function showAddedFeedback(productId) {
   }, 1500);
 }
 
-/** Scroll smoothly to a section by element id */
 function scrollToSection(sectionId) {
   const el = document.getElementById(sectionId);
   if (el) {
@@ -469,16 +547,12 @@ function scrollToSection(sectionId) {
   }
 }
 
-/** HTML escape utility */
 function escapeHTML(str) {
   const div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   11. SCROLL-BASED HEADER EFFECT
-══════════════════════════════════════════════════════════════════ */
 function initScrollEffect() {
   const header = document.getElementById('site-header');
   if (!header) return;
@@ -492,25 +566,8 @@ function initScrollEffect() {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   12. INTERSECTION OBSERVER — ANIMATE IN CARDS
-══════════════════════════════════════════════════════════════════ */
 function initAnimations() {
   if (!('IntersectionObserver' in window)) return;
-  const style = document.createElement('style');
-  style.textContent = `
-    .product-card, .craft-card, .kpi-card, .flow-step {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .product-card.visible, .craft-card.visible, .kpi-card.visible, .flow-step.visible {
-      opacity: 1;
-      transform: none;
-    }
-  `;
-  document.head.appendChild(style);
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -520,18 +577,17 @@ function initAnimations() {
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  // Observe after a tick so elements are rendered
   setTimeout(() => {
-    document.querySelectorAll('.product-card, .craft-card, .kpi-card, .flow-step')
+    document.querySelectorAll('.product-card, .craft-card, .kpi-card, .flow-step, .mfr-card')
       .forEach(el => observer.observe(el));
   }, 100);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   13. EVENT DELEGATION & BINDING
+   10. EVENT DELEGATION & BINDING
 ══════════════════════════════════════════════════════════════════ */
 function bindEvents() {
-  // ── Product Grid: Add to Cart ──
+  // Add to cart delegation
   const grid = document.getElementById('product-grid');
   if (grid) {
     grid.addEventListener('click', e => {
@@ -540,12 +596,19 @@ function bindEvents() {
     });
   }
 
-  // ── Cart Toggle ──
+  // Category filter clicks
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setCategoryFilter(btn.dataset.category);
+    });
+  });
+
+  // Cart open / close
   document.getElementById('cart-toggle')?.addEventListener('click', openCart);
   document.getElementById('close-cart')?.addEventListener('click', closeCart);
   document.getElementById('cart-overlay')?.addEventListener('click', closeCart);
 
-  // ── Cart Body: Quantity & Remove ──
+  // Cart item qty & remove
   document.getElementById('cart-items-list')?.addEventListener('click', e => {
     const btn = e.target.closest('[data-action]');
     if (!btn) return;
@@ -557,20 +620,20 @@ function bindEvents() {
     }
   });
 
-  // ── Checkout ──
+  // Checkout
   document.getElementById('checkout-btn')?.addEventListener('click', checkout);
   document.getElementById('clear-cart')?.addEventListener('click', () => {
     if (STATE.cart.length === 0) return;
     if (window.confirm('Clear all items from your cart?')) clearCart();
   });
 
-  // ── Success Modal ──
+  // Modal
   document.getElementById('modal-close')?.addEventListener('click', closeModal);
   document.getElementById('success-backdrop')?.addEventListener('click', e => {
     if (e.target === document.getElementById('success-backdrop')) closeModal();
   });
 
-  // ── Nav Links (desktop + mobile) ──
+  // Navigation clicks
   document.querySelectorAll('[data-view]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault();
@@ -586,34 +649,25 @@ function bindEvents() {
         if (scroll) scrollToSection(scroll);
       }
 
-      // Close mobile nav
       closeMobileNav();
     });
   });
 
-  // ── Hero Scroll Buttons ──
+  // Scroll triggers
   document.querySelectorAll('[data-scroll]').forEach(btn => {
-    if (!btn.dataset.view) { // only standalone scroll buttons (not nav links)
+    if (!btn.dataset.view) {
       btn.addEventListener('click', () => scrollToSection(btn.dataset.scroll));
     }
   });
 
-  // ── Back to Store (Dashboard) ──
+  // Dashboard back button
   document.getElementById('back-to-store')?.addEventListener('click', () => switchView('storefront'));
 
-  // ── Footer links with data-view ──
-  document.querySelectorAll('.site-footer [data-view]').forEach(el => {
-    el.addEventListener('click', e => {
-      e.preventDefault();
-      switchView(el.dataset.view);
-    });
-  });
-
-  // ── Hamburger ──
+  // Mobile menu
   const hamburger = document.getElementById('hamburger');
   hamburger?.addEventListener('click', toggleMobileNav);
 
-  // ── Keyboard: ESC closes cart/modal ──
+  // ESC key
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       if (STATE.cartOpen) closeCart();
@@ -623,7 +677,6 @@ function bindEvents() {
   });
 }
 
-/* ── Mobile Nav ── */
 function toggleMobileNav() {
   const nav = document.getElementById('mobile-nav');
   const hamburger = document.getElementById('hamburger');
@@ -644,17 +697,14 @@ function closeMobileNav() {
   nav.setAttribute('aria-hidden', 'true');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   14. DASHBOARD CLOCK INTERVAL
-══════════════════════════════════════════════════════════════════ */
 function startDashboardClock() {
   setInterval(() => {
     if (STATE.currentView === 'dashboard') updateDashboardClock();
-  }, 60000); // update every minute
+  }, 60000);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   15. INIT
+   11. INITIALIZATION
 ══════════════════════════════════════════════════════════════════ */
 function init() {
   loadCart();
@@ -665,17 +715,9 @@ function init() {
   initScrollEffect();
   initAnimations();
   startDashboardClock();
-
-  // Ensure storefront shows by default
   switchView('storefront');
-  console.log(
-    '%c🍬 Kaveri Heritage Foods — App Loaded %c v1.0.0 ',
-    'background:#3B1E08;color:#C9A84C;padding:4px 8px;border-radius:4px 0 0 4px;font-weight:bold;',
-    'background:#C9A84C;color:#3B1E08;padding:4px 8px;border-radius:0 4px 4px 0;font-weight:bold;'
-  );
 }
 
-// Boot when DOM ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
